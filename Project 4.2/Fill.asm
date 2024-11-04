@@ -9,3 +9,47 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+
+
+(RESET) 
+	@SCREEN
+	D=A
+	@cur_screen_word 	M=D
+
+(LOOP)	
+	@KBD
+	D=M
+	
+	@FILL 	D; JGT
+	
+	@BLANK 
+	0; JMP
+	
+(FILL)
+	@cur_screen_word
+	A=M
+	M=-1
+	
+	@CHECK
+	0; JMP
+	
+(BLANK)
+	@cur_screen_word
+	A=M
+	M=0
+	
+	@CHECK
+	0; JMP
+	
+(CHECK) 
+	@cur_screen_word
+	MD=M+1
+	@KBD
+	D=D-A
+	
+	@RESET 
+	D; JEQ
+	
+	@LOOP  
+	0; JMP
+	
